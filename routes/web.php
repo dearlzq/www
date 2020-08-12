@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+
+//    return view('welcome');
+//});
+
+Route::get('/','Index\IndexController@index');//首页
+
+//商品
+Route::get('/goods/shop-single/{id}','Goods\GoodsController@ShopSingle');//商品详情
+Route::get('/goods/product-list','Goods\GoodsController@ProductList');//商品列表
