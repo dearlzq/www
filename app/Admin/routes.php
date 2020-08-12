@@ -11,6 +11,9 @@ Route::group([
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index')->name('home');
 
+    $router->get('/', 'HomeController@index')->name('home');
+    $router->resource('goods-models', GoodsController::class);
+    $router->resource('order-models', OrderController::class);
+    $router->resource('video-models', VideoController::class);
 });
