@@ -80,8 +80,9 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 <!-- scripts -->
+<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
 <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
-
+<div class="prism-player" id="player-con"></div>
 <script>
     var player = new Aliplayer({
             "id": "player-con",
