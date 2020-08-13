@@ -199,7 +199,7 @@
 <script>
     var player = new Aliplayer({
             "id": "player-con",
-            "source": "/storage/{!! $goods['m3u8'] !!}",
+            "source": "/storage/",
             "width": "50%",
             "height": "400px",
             "autoplay": true,
