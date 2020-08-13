@@ -188,12 +188,6 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 <!-- scripts -->
-<script src="js/jquery.min.js"></script>
-<script src="js/materialize.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/fakeLoader.min.js"></script>
-<script src="js/animatedModal.min.js"></script>
-<script src="js/main.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
 
 <script>

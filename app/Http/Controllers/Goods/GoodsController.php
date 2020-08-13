@@ -41,8 +41,6 @@ class GoodsController extends Controller
 
         //获取视频信息
         $v = VideoModel::where(['goods_id'=>$id])->first();
-//        dd($v);
-
 
         if($v)
         {
