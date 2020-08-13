@@ -198,10 +198,106 @@
     </div>
     <!-- end features -->
 
+
+
+
+
+
+    <!--推荐 quote -->
+    <div class="section quote">
+        <div class="container">
+            <h4>recommend---推荐</h4>
+            <p>Here will recommend the best to you</p>
+        </div>
+    </div>
+    <!-- end quote -->
+    <!-- product -->
+    <div class="section product">
+        <div class="container">
+            <div class="section-head">
+                <h4>recommend</h4>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+            </div>
+            <div class="row">
+                @foreach($is_show as $z=>$x)
+                    <div class="col s6">
+                        <div class="content">
+                            <img src="/storage/{{$x->goods_img}}" alt="">
+                            <h6><a href="{{ URL('/goods/shop-single/'.$x->goods_id)}}">{{$x->goods_name}}</a></h6>
+                            <div class="price">
+                                ${{$x->shop_price}} <span>${{$x->shop_price}}{{$x->shop_price}}</span>
+                            </div>
+
+                            <a href="{{url('/cart/cartlist/'.$x->goods_id)}}">
+                                <button class="btn button-default">ADD TO CART</button>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end product -->
+
+
+
+
+
+
+    <!--推荐 quote -->
+    <div class="section quote">
+        <div class="container">
+            <h4>NEW---新品</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ducimus illo hic iure eveniet</p>
+        </div>
+    </div>
+    <!-- end quote -->
+    <!-- product -->
+    <div class="section product">
+        <div class="container">
+            <div class="section-head">
+                <h4>NEW</h4>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+            </div>
+            <div class="row">
+                @foreach($is_new as $n=>$m)
+                    <div class="col s6">
+                        <div class="content">
+                            <img src="/storage/{{$m->goods_img}}" alt="">
+                            <h6><a href="{{ URL('/goods/shop-single/'.$m->goods_id)}}">{{$m->goods_name}}</a></h6>
+                            <div class="price">
+                                ${{$m->shop_price}} <span>${{$m->shop_price}}{{$m->shop_price}}</span>
+                            </div>
+
+                            <a href="{{url('/cart/cartlist/'.$m->goods_id)}}">
+                                <button class="btn button-default">ADD TO CART</button>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end product -->
+
+
+
+
+
+
+
+
+
     <!--新品 quote -->
     <div class="section quote">
         <div class="container">
-            <h4>New Goods</h4>
+            <h4>ALL---全部</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ducimus illo hic iure eveniet</p>
         </div>
     </div>
@@ -211,7 +307,7 @@
     <div class="section product">
         <div class="container">
             <div class="section-head">
-                <h4>NEW PRODUCT</h4>
+                <h4>ALL</h4>
                 <div class="divider-top"></div>
                 <div class="divider-bottom"></div>
             </div>
@@ -244,43 +340,6 @@
 
 
 
-    <!--推荐 quote -->
-    <div class="section quote">
-        <div class="container">
-            <h4>Buy It</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ducimus illo hic iure eveniet</p>
-        </div>
-    </div>
-    <!-- end quote -->
-    <!-- product -->
-    <div class="section product">
-        <div class="container">
-            <div class="section-head">
-                <h4>NEW PRODUCT</h4>
-                <div class="divider-top"></div>
-                <div class="divider-bottom"></div>
-            </div>
-            <div class="row">
-                @foreach($goods as $k=>$v)
-                    <div class="col s6">
-                        <div class="content">
-                            <img src="/storage/{{$v->goods_img}}" alt="">
-                            <h6><a href="{{ URL('/goods/shop-single/'.$v->goods_id)}}">{{$v->goods_name}}</a></h6>
-                            <div class="price">
-                                ${{$v->shop_price}} <span>${{$v->shop_price}}{{$v->shop_price}}</span>
-                            </div>
 
-                            <a href="{{url('/cart/cartlist/'.$v->goods_id)}}">
-                                <button class="btn button-default">ADD TO CART</button>
-                            </a>
-                        </div>
-                    </div>
-                @endforeach
-
-
-            </div>
-        </div>
-    </div>
-    <!-- end product -->
 
 @endsection
