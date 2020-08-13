@@ -10,7 +10,7 @@
         <div class="col s4">
             <div class="bar-center">
                 <a href="#animatedModal" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
-                <span>2</span>
+                <span>1</span>
             </div>
         </div>
         <div class="col s2">
