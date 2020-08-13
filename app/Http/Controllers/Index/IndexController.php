@@ -12,6 +12,9 @@ class IndexController extends Controller
     public function index()
     {
         $goods = Goods::get();
-        return view('index.index.index',compact('goods'));
+        $is_new = Goods::where('is_new','=','1')->get();
+//        dd($is_new);
+        $is_show = Goods::where('is_show','=','1')->get();
+        return view('index.index.index',compact('goods','is_new','is_show'));
     }
 }

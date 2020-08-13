@@ -4,119 +4,11 @@
 @section('content')
 
     @include('index.layouts.navbar')
+    @include('index.layouts.navright')
+    @include('index.layouts.cartmenu')
 
 
-    <!-- cart menu -->
-    <div class="menus" id="animatedModal">
-        <div class="close-animatedModal close-icon">
-            <i class="fa fa-close"></i>
-        </div>
-        <div class="modal-content">
-            <div class="cart-menu">
-                <div class="container">
-                    <div class="content">
-                        <div class="cart-1">
-                            <div class="row">
-                                <div class="col s5">
-                                    <img src="/static/img/cart-menu1.png" alt="">
-                                </div>
-                                <div class="col s7">
-                                    <h5><a href="">Fashion Men's</a></h5>
-                                </div>
-                            </div>
-                            <div class="row quantity">
-                                <div class="col s5">
-                                    <h5>Quantity</h5>
-                                </div>
-                                <div class="col s7">
-                                    <input value="1" type="text">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5">
-                                    <h5>Price</h5>
-                                </div>
-                                <div class="col s7">
-                                    <h5>$20</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5">
-                                    <h5>Action</h5>
-                                </div>
-                                <div class="col s7">
-                                    <div class="action"><i class="fa fa-trash"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="cart-2">
-                            <div class="row">
-                                <div class="col s5">
-                                    <img src="/static/img/cart-menu2.png" alt="">
-                                </div>
-                                <div class="col s7">
-                                    <h5><a href="">Fashion Men's</a></h5>
-                                </div>
-                            </div>
-                            <div class="row quantity">
-                                <div class="col s5">
-                                    <h5>Quantity</h5>
-                                </div>
-                                <div class="col s7">
-                                    <input value="1" type="text">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5">
-                                    <h5>Price</h5>
-                                </div>
-                                <div class="col s7">
-                                    <h5>$20</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s5">
-                                    <h5>Action</h5>
-                                </div>
-                                <div class="col s7">
-                                    <div class="action"><i class="fa fa-trash"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="total">
-                        <div class="row">
-                            <div class="col s7">
-                                <h5>Fashion Men's</h5>
-                            </div>
-                            <div class="col s5">
-                                <h5>$21.00</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s7">
-                                <h5>Fashion Men's</h5>
-                            </div>
-                            <div class="col s5">
-                                <h5>$21.00</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s7">
-                                <h6>Total</h6>
-                            </div>
-                            <div class="col s5">
-                                <h6>$41.00</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn button-default">Process to Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end cart menu -->
+
 
     <!-- slider -->
     <div class="slider">
@@ -198,10 +90,106 @@
     </div>
     <!-- end features -->
 
-    <!-- quote -->
+
+
+
+
+
+    <!--推荐 quote -->
     <div class="section quote">
         <div class="container">
-            <h4>FASHION UP TO 50% OFF</h4>
+            <h4>recommend---推荐</h4>
+            <p>Here will recommend the best to you</p>
+        </div>
+    </div>
+    <!-- end quote -->
+    <!-- product -->
+    <div class="section product">
+        <div class="container">
+            <div class="section-head">
+                <h4>recommend</h4>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+            </div>
+            <div class="row">
+                @foreach($is_show as $z=>$x)
+                    <div class="col s6">
+                        <div class="content">
+                            <img src="/storage/{{$x->goods_img}}" alt="">
+                            <h6><a href="{{ URL('/goods/shop-single/'.$x->goods_id)}}">{{$x->goods_name}}</a></h6>
+                            <div class="price">
+                                ${{$x->shop_price}} <span>${{$x->shop_price}}{{$x->shop_price}}</span>
+                            </div>
+
+                            <a href="{{url('/cart/cartlist/'.$x->goods_id)}}">
+                                <button class="btn button-default">ADD TO CART</button>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end product -->
+
+
+
+
+
+
+    <!--推荐 quote -->
+    <div class="section quote">
+        <div class="container">
+            <h4>NEW---新品</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ducimus illo hic iure eveniet</p>
+        </div>
+    </div>
+    <!-- end quote -->
+    <!-- product -->
+    <div class="section product">
+        <div class="container">
+            <div class="section-head">
+                <h4>NEW</h4>
+                <div class="divider-top"></div>
+                <div class="divider-bottom"></div>
+            </div>
+            <div class="row">
+                @foreach($is_new as $n=>$m)
+                    <div class="col s6">
+                        <div class="content">
+                            <img src="/storage/{{$m->goods_img}}" alt="">
+                            <h6><a href="{{ URL('/goods/shop-single/'.$m->goods_id)}}">{{$m->goods_name}}</a></h6>
+                            <div class="price">
+                                ${{$m->shop_price}} <span>${{$m->shop_price}}{{$m->shop_price}}</span>
+                            </div>
+
+                            <a href="{{url('/cart/cartlist/'.$m->goods_id)}}">
+                                <button class="btn button-default">ADD TO CART</button>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end product -->
+
+
+
+
+
+
+
+
+
+    <!--新品 quote -->
+    <div class="section quote">
+        <div class="container">
+            <h4>ALL---全部</h4>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ducimus illo hic iure eveniet</p>
         </div>
     </div>
@@ -211,7 +199,7 @@
     <div class="section product">
         <div class="container">
             <div class="section-head">
-                <h4>NEW PRODUCT</h4>
+                <h4>ALL</h4>
                 <div class="divider-top"></div>
                 <div class="divider-bottom"></div>
             </div>
@@ -240,4 +228,10 @@
     <!-- loader -->
     <div id="fakeLoader"></div>
     <!-- end loader -->
+
+
+
+
+
+
 @endsection

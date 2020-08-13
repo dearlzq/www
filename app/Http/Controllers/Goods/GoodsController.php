@@ -10,7 +10,6 @@ use App\Model\VideoModel;
 
 class GoodsController extends Controller
 {
-    //
     //商品详情
     public function ShopSingle($id)
     {
@@ -41,11 +40,12 @@ class GoodsController extends Controller
 
         //获取视频信息
         $v = VideoModel::where(['goods_id'=>$id])->first();
+
         if($v)
         {
             $goods_info['m3u8'] = $v->m3u8;
         }else{
-            $goods_info['m3u8'] = "video/aaa.mp4";        //默认视频
+            $goods_info['m3u8'] = "video_out/3.m3u8";        //默认视频
         }
 
         //记录商品浏览量  商品浏览排行
@@ -74,5 +74,11 @@ class GoodsController extends Controller
 
         $good = Goods::get();
         return view('index.goods.product-list',compact('good'));
+    }
+
+    public function talklist()
+    {
+        $data = request()->input();
+        dd($data);
     }
 }

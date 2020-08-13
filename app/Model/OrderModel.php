@@ -4,10 +4,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VideoModel extends Model
+class OrderModel extends Model
 {
-
-    protected  $table='p_goods_video';
-    protected $primaryKey='id';
+    protected  $table='p_order_goods';
+    protected $primaryKey='rec_id';
     public $timestamps = false;
 }

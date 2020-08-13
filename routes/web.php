@@ -11,16 +11,21 @@
 |
 */
 
-//Route::get('/', function () {
-
-//    return view('welcome');
-//});
+//计划任务
+Route::prefix('/cron')->group(function (){
+    Route::get('/codec','Cron\VideoCron@codec');   //定时转码
+});
 
 Route::get('/','Index\IndexController@index');//首页
+
+
+
 
 //商品
 Route::get('/goods/shop-single/{id}','Goods\GoodsController@ShopSingle');//商品详情
 Route::get('/goods/product-list','Goods\GoodsController@ProductList');//商品列表
+Route::get('/goods/talklist/','Goods\GoodsController@talklist');//商品评论
+Route::get('/goods/top/','Goods\RankController@index');//排行榜
 
 //Route::any('/lists','wish\WishController@lists');  //我的收藏
 
@@ -46,5 +51,7 @@ Route::any('/tuichu','user\UserController@tuichu');//退出执行
 //个人中心
 Route::any('/lists','Shoucang\SafeController@lists');//修改密码
 Route::any('/login_do','Shoucang\SafeController@login_do');
+
+
 
 

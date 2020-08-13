@@ -91,7 +91,7 @@
 
                 if(res.code==0){
                     alert('注册成功')
-                    location.href='/login'
+                    location.href='/index/user/login'
                 }else{
                     alert(res.msg);
                 }
