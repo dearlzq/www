@@ -10,7 +10,6 @@ use App\Model\VideoModel;
 
 class GoodsController extends Controller
 {
-    //
     //商品详情
     public function ShopSingle($id)
     {
