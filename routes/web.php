@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//计划任务
+Route::prefix('/cron')->group(function (){
+    Route::get('/codec','Cron\VideoCron@codec');   //定时转码
+});

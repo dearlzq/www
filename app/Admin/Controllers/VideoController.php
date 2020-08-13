@@ -30,7 +30,6 @@ class VideoController extends AdminController
         $grid->column('goods_id', __('Goods id'));
         $grid->column('path', __('Path'));
         $grid->column('m3u8', __('M3u8'));
-        $grid->column('status', __('Status'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -51,7 +50,6 @@ class VideoController extends AdminController
         $show->field('goods_id', __('Goods id'));
         $show->field('path', __('Path'));
         $show->field('m3u8', __('M3u8'));
-        $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -65,8 +63,9 @@ class VideoController extends AdminController
      */
     protected function form()
     {
+        $goods_id = isset($_GET['id']) ? intval($_GET['id']) : null;
         $form = new Form(new VideoModel());
-        $form->text('goods_id',__('Goods Id'));
+        $form->text('goods_id', __('Goods id'))->value($goods_id);
         $form->file('path',__('Path'))->uniqueName()->move('video');
         return $form;
     }
