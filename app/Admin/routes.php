@@ -10,6 +10,8 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
+
+
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('goods-models', GoodsController::class); //商品管理
     $router->resource('order-models', OrderController::class); //订单管理
