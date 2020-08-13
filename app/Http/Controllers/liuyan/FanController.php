@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\liuyan;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\shop_fan;
-use App\Model\UserModel;
-
+use App\Model\Indexuser;
 class FanController extends Controller
 {
     //反馈的方法
@@ -16,8 +13,7 @@ class FanController extends Controller
             $p_id=shop_fan::where("p_id",$v['f_id'])->get();
             $v['aa']=$p_id;
         }
-        // dd($shop_fan);
-        return view("qtai.fan",compact('shop_fan'));
+        return view('index.liuyan.liuyan',compact('shop_fan'));
     }
     //反馈的执行方法
     public function fanAdd(Request $request){
@@ -34,7 +30,7 @@ class FanController extends Controller
         // print_r($data);exit;
         $shop_fan->f_time=time();
         $shop_fan->f_text=$data['content'];
-        $u_name=UserModel::where('u_id',$u_id)->value('u_name');
+        $u_name=Indexuser::where('u_id',$u_id)->value('u_name');
         // print_r($u_name);
         $shop_fan->f_name=$u_name;
         $res=$shop_fan->save($data);
@@ -65,7 +61,7 @@ class FanController extends Controller
             return json_encode($arr,JSON_UNESCAPED_UNICODE);
         }
         $shop_fan=new shop_fan;
-        $u_name=UserModel::where('u_id',$u_id)->value('u_name');
+        $u_name=Indexuser::where('u_id',$u_id)->value('u_name');
         // print_r($u_name);
         $shop_fan->f_name=$u_name;
         $shop_fan->p_id=$f_id;

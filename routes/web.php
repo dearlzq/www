@@ -34,11 +34,14 @@ Route::any('/add','index\HomeController@add');
 Route::any('/add_do','index\HomeController@add_do');
 Route::any('/city','index\HomeController@city');
 
-//前台登录注册
-Route::get('/reg','User\UserController@reg');//注册
-Route::post('/DoReg','User\UserController@DoReg');//注册
-Route::get('/login','User\UserController@login');//登陆
-Route::post('/DoLogin','User\UserController@DoLogin');//登陆
+//前台登录
+Route::any('/login','user\UserController@login'); //登录展示
+Route::any('/login_dos','user\UserController@login_do'); //执行登录
+//前台注册
+Route::any('/reg','user\UserController@reg');//注册
+Route::any('/go_reg','user\UserController@go_reg');//发送短信验证码
+Route::any('/reg_do','user\UserController@reg_do');//执行注册
+Route::any('/tuichu','user\UserController@tuichu');//退出执行
 
 //个人中心
 Route::any('/lists','Shoucang\SafeController@lists');//修改密码
