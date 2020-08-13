@@ -84,12 +84,12 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="checkout.html" class="button-link">
+                    <a href="/fankui" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-credit-card"></i>
                             </div>
-                            Checkout
+                            评论留言
                         </div>
                     </a>
                 </div>
@@ -116,12 +116,12 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="error404.html" class="button-link">
+                    <a href="/lists" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-hourglass-half"></i>
                             </div>
-                            404
+                            修改密码
                         </div>
                     </a>
                 </div>
@@ -170,7 +170,7 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="login.html" class="button-link">
+                    <a href="login" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-sign-in"></i>
@@ -180,7 +180,7 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="register.html" class="button-link">
+                    <a href="reg" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-user-plus"></i>
