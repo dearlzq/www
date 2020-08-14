@@ -1,5 +1,5 @@
 @extends('index.layouts.shop')
-
+@include('index.layouts.footerjs')
 @section('title', '商品详情')
 @section('content')
 
@@ -105,7 +105,19 @@
 <script>
     $(function(){
         $("#cart_add").click(function(e){
-            alert(111);
+            var gid = ($(this).attr('data-gid'))
+            $.ajax({
+                url: '/cart/add?id=' + gid,
+                type: 'get',
+                dataType: 'json',
+                success:function(d){
+                    console.log(d);
+                    if(d.errno==0)
+                    {
+                        alert("已成功加入购物车");
+                    }
+                }
+            });
         });
     })
 </script>

@@ -22,7 +22,7 @@
                             <input type="password" placeholder="确认密码" class="validate" id="repwd"  name="" required>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
+                            <input type="text   " placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
                         </div>
                         <div class="input-field">
                             <input type="text" placeholder="短信验证码" class="validate" id="code" name="code" >  <a href="#" id="verify">获取短信验证码</a>
@@ -43,8 +43,8 @@
     <!-- end loader -->
 @endsection
 
-<script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/adm/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/adm/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 <script>
     //发送手机验证码
@@ -96,7 +96,7 @@
 
                 if(res.code==0){
                     alert('注册成功')
-                    location.href='/index/user/login'
+                    location.href='/login'
                 }else{
                     alert(res.msg);
                 }

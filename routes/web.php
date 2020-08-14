@@ -27,7 +27,10 @@ Route::get('/goods/product-list','Goods\GoodsController@ProductList');//商品�
 Route::get('/goods/talklist/','Goods\GoodsController@talklist');//商品评论
 Route::get('/goods/top/','Goods\RankController@index');//排行榜
 
-//Route::any('/lists','wish\WishController@lists');  //我的收藏
+//购物车
+Route::get('/cart/add','Cart\CartController@add');//加入购物车
+Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
+Route::any('/collect','shoucang\ShouController@collect');//收藏
 
 //评论留言
 Route::any('/fankui','liuyan\FanController@fankui');//展示
@@ -35,9 +38,8 @@ Route::any('/fanAdd','liuyan\FanController@fanAdd');//执行
 Route::any('/huiAdd','liuyan\FanController@huiAdd');//回复
 
 //个人信息
-Route::any('/add','index\HomeController@add');
-Route::any('/add_do','index\HomeController@add_do');
-Route::any('/city','index\HomeController@city');
+Route::any('/add','Shoucang\ShouController@add');
+Route::any('/add_do','Shoucang\ShouController@add_do');
 
 //前台登录
 Route::any('/login','User\UserController@login'); //登录展示
