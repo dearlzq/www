@@ -8,7 +8,7 @@
 @include('index.layouts.footerjs')
 @include('index.layouts.cartmenu')
 
-        
+
 <!-- cart -->
 <div class="cart section">
     <div class="container">
