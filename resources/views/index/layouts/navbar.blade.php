@@ -169,7 +169,7 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="login" class="button-link">
+                    <a href="/login" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-sign-in"></i>
@@ -179,7 +179,7 @@
                     </a>
                 </div>
                 <div class="col s4">
-                    <a href="reg" class="button-link">
+                    <a href="/reg" class="button-link">
                         <div class="menu-link">
                             <div class="icon">
                                 <i class="fa fa-user-plus"></i>
