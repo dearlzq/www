@@ -8,7 +8,7 @@
 @include('index.layouts.footerjs')
 @include('index.layouts.cartmenu')
 
-        
+
 <!-- cart -->
 <div class="cart section">
     <div class="container">
@@ -23,7 +23,7 @@
                             <h5>Image</h5>
                         </div>
                         <div class="col s7">
-                            <img src="/static/img/cart1.png" alt="">
+                            <img src="/storage/{{$v['goods_img']}}" alt="">
                         </div>
                     </div>
                     <div class="row">
