@@ -1,6 +1,6 @@
 @extends('index.layouts.shop')
 
-@section('title', '首页')
+@section('title', '购物车列表')
 @section('content')
 
 @include('index.layouts.navbar')
@@ -23,7 +23,7 @@
                             <h5>Image</h5>
                         </div>
                         <div class="col s7">
-                            <img src="/static/img/cart1.png" alt="">
+                            <img src="/storage/{{$v['goods_img']}}" alt="">
                         </div>
                     </div>
                     <div class="row">
@@ -71,7 +71,8 @@
                 </div>
             </div>
         @endforeach
-        <button class="btn button-default">结账</button>
+        {{--<button class="btn button-default">结账</button>--}}
+        <a href="" class="btn button-default">订单</a>
     </div>
 </div>
 <!-- end cart -->

@@ -36,6 +36,7 @@ class CartController extends Controller
             $g[$k]['num'] = Redis::zScore($redis_cart_ss2,$k);
             $g_info = Goods::detail($k);
             $goods[] = array_merge($g[$k],$g_info);
+//            dd($goods);
         }
         $data = [
             'goods' => $goods
