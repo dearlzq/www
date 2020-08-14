@@ -28,7 +28,9 @@ Route::get('/goods/talklist/','Goods\GoodsController@talklist');//商品评论
 Route::get('/goods/top/','Goods\RankController@index');//排行榜
 
 //Route::any('/lists','wish\WishController@lists');  //我的收藏
-
+//购物车
+Route::get('/cart/add','Cart\CartController@add');//加入购物车
+Route::get('/cart/cartlist','Cart\CartController@cartList');//加入购物车
 //评论留言
 Route::any('/fankui','liuyan\FanController@fankui');//展示
 Route::any('/fanAdd','liuyan\FanController@fanAdd');//执行

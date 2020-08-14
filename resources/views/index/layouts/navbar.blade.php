@@ -22,7 +22,6 @@
     </div>
 </div>
 <!-- end navbar bottom -->
-
 <!-- menu -->
 <div class="menus" id="animatedModal2">
     <div class="close-animatedModal2 close-icon">
