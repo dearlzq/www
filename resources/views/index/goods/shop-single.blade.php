@@ -7,6 +7,7 @@
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')
+@include('index.layouts.footerjs')
 
 
 
@@ -19,9 +20,7 @@
             <h5>{{$goods['goods_name']}}</h5>
             <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
             <p>{{$goods['goods_desc']}}</p>
-            <a href="{{url('/cart/cartlist/'.$goods['goods_id'])}}">
-                <button class="btn button-default">加入购物车</button>
-            </a>
+                <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
         </div>
 
         <div class="review">
@@ -100,5 +99,12 @@
             console.log("The player is created");
         }
     );
+</script>
+<script>
+    $(function(){
+        $("#cart_add").click(function(e){
+            alert(111);
+        });
+    })
 </script>
 @endsection
