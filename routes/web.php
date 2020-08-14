@@ -27,6 +27,9 @@ Route::get('/goods/product-list','Goods\GoodsController@ProductList');//商品�
 Route::get('/goods/talklist/','Goods\GoodsController@talklist');//商品评论
 Route::get('/goods/top/','Goods\RankController@index');//排行榜
 
+//购物车
+Route::get('/cart/add','Cart\CartController@add');//加入购物车
+Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
 Route::any('/collect','shoucang\ShouController@collect');//收藏
 
 //评论留言
