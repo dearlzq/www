@@ -112,7 +112,7 @@
                     console.log(d);
                     if(d.errno==0)
                     {
-                        alert("已加入购物车");
+                        alert("已成功加入购物车");
                     }
                 }
             });

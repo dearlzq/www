@@ -9,17 +9,38 @@ use App\Model\Goods;
 use Illuminate\Support\Facades\Redis;
 class CartController extends Controller
 {
-
+    public $now;
+    public $uuid;
     public function __construct()
     {
         $this->now = time();
         $this->uuid = $_COOKIE['uuid'];
     }
-    public $now;
-    public $uuid;
+
     public function cartList()
     {
-        return view('index.cart.cartlist');
+        $redis_cart_ss1 = 'ss:cart:goods:'.$this->uuid;
+        $redis_cart_ss2 = 'ss:cart:goods_num:'.$this->uuid;
+        $cart_goods = Redis::zrevRange($redis_cart_ss1,0,-1,true);
+//        print_r($cart_goods);die;
+        if(empty($cart_goods))
+        {
+            return view('index.cart.aww');
+        }
+
+        //获取商品个数
+
+        foreach($cart_goods as $k=>$v)
+        {
+            $g[$k]['id'] = $k;
+            $g[$k]['num'] = Redis::zScore($redis_cart_ss2,$k);
+            $g_info = Goods::detail($k);
+            $goods[] = array_merge($g[$k],$g_info);
+        }
+        $data = [
+            'goods' => $goods
+        ];
+        return view('index.cart.cartlist',$data);
     }
 
     /**
