@@ -1,5 +1,5 @@
 @extends('index.layouts.shop')
-
+@include('index.layouts.footerjs')
 @section('title', '商品详情')
 @section('content')
 
@@ -20,7 +20,9 @@
             <h5>{{$goods['goods_name']}}</h5>
             <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
             <p>{{$goods['goods_desc']}}</p>
+
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
+                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车列表</a>
         </div>
 
         <div class="review">
@@ -103,7 +105,19 @@
 <script>
     $(function(){
         $("#cart_add").click(function(e){
-            alert(111);
+            var gid = ($(this).attr('data-gid'))
+            $.ajax({
+                url: '/cart/add?id=' + gid,
+                type: 'get',
+                dataType: 'json',
+                success:function(d){
+                    console.log(d);
+                    if(d.errno==0)
+                    {
+                        alert("已成功加入购物车");
+                    }
+                }
+            });
         });
     })
 </script>

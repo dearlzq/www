@@ -3,7 +3,7 @@
 @section('title', '商品列表')
 @section('content')
 
-
+@include('index.layouts.footerjs')
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')
@@ -35,7 +35,6 @@
                         ${{$v->shop_price}} <span>${{$v->shop_price}}{{$v->shop_price}}</span>
                     </div>
                     <a href="{{url('/cart/cartlist/'.$v->goods_id)}}">
-                        <button class="btn button-default">ADD TO CART</button>
                     </a>
 
                 </div>
