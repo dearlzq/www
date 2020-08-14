@@ -22,7 +22,7 @@
                             <input type="password" placeholder="确认密码" class="validate" id="repwd"  name="" required>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
+                            <input type="text   " placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
                         </div>
                         <div class="input-field">
                             <input type="text" placeholder="短信验证码" class="validate" id="code" name="code" >  <a href="#" id="verify">获取短信验证码</a>

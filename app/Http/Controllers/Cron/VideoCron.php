@@ -24,13 +24,12 @@ class VideoCron extends Controller
             foreach($list as $k=>$v)
             {
                 $goods_id = $v->goods_id;       //商品id
-                echo 1111;echo "\n";
 
                 //开始转码
                 VideoModel::where(['goods_id'=>$goods_id])->update(['status'=>1]);      //更新转码状态为 1  开始转码
 
 
-//                fastcgi_finish_request();       // ???
+                fastcgi_finish_request();       // ???
                 //转码
                 $video_file = $v->path;
                 $video_out_path = 'video_out/';          //转码后文件路径
@@ -39,7 +38,6 @@ class VideoCron extends Controller
                 $ts_second = 20;                        // 分片视频长度 秒
 
                 $cmd = "cd storage && ffmpeg -i {$video_file} -codec:v libx264 -codec:a mp3 -map 0 -f ssegment -segment_format mpegts -segment_list $m3u8_file -segment_time $ts_second $ts_file";
-                echo $cmd;echo "\n";
                 shell_exec($cmd);
 
                 VideoModel::where(['goods_id'=>$goods_id])->update(['status'=>2,'m3u8'=>$m3u8_file]);  //更新转码状态为完成
