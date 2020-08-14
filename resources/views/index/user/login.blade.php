@@ -34,8 +34,8 @@
     <!-- end loader -->
 
 @endsection
-<script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/adm/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/adm/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(document).on('click','#login',function(){
         var u_phone = $('#u_phone').val();
@@ -48,7 +48,7 @@
             success:function(res){
                 if(res.code==00000){
                     alert(res.msg);
-                    location.href = "/";
+                    location.href = '/';
                 }else{
                     alert(res.msg);
                 }

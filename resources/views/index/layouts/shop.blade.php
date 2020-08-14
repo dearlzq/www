@@ -24,6 +24,25 @@
 </head>
 <body>
 
+<<<<<<< HEAD
+<!-- side nav right-->
+<div class="side-nav-panel-right">
+    <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
+        <li class="profil">
+            <img src="/static/img/profile.jpg" alt="">
+            <h2>John Doe</h2>
+        </li>
+        <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
+        <li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
+        <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
+        <li><a href="login"><i class="fa fa-sign-in"></i>Login</a></li>
+        <li><a href="reg"><i class="fa fa-user-plus"></i>Register</a></li>
+    </ul>
+</div>
+<!-- end side nav right-->
+
+=======
+>>>>>>> 0eedbb6f6c97c41bf1b13ea39d7a75dc236340f1
 @yield('content')
 
 <!-- footer -->

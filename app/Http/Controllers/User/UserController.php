@@ -80,12 +80,12 @@ class UserController extends Controller
         }
 
         $codetrue = DB::table('shop_code')->where('u_phone', $phone)->first();
-
         //dd($codetrue);
         if ($code != $codetrue->code) {
             echo json_encode(['errno' => 00001, 'msg' => '验证码错误!']);
             exit;
         }
+
         $pwd = $request->post('u_pwd');
         $arr='/^\w{6,16}$/';
         if(empty($pwd)){
@@ -99,11 +99,13 @@ class UserController extends Controller
 
 
         $user_model = new Indexuser();
+        var_dump($user_model);die;
         $user_model->u_phone = $phone;
         $user_model->u_pwd = md5($pwd);
         $user_model->u_name = $u_name;
         $user_model->u_time = time();
         //echo 123;die;
+
         if ($user_model->save()) {
             return ['code'=>'00000','msg'=>'注册成功'];
         }
