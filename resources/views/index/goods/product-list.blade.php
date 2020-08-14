@@ -3,7 +3,7 @@
 @section('title', '商品列表')
 @section('content')
 
-
+@include('index.layouts.footerjs')
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')

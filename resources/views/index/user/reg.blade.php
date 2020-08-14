@@ -57,7 +57,12 @@
             dataType:'json',
             data:{'u_phone':u_phone},
             success:function(res){
-                alert(res.msg);
+                if(res.msg == '00000') {
+                    location.href = "/";
+                } else {
+                    alert(res.msg);
+                }
+
             }
 
         });
