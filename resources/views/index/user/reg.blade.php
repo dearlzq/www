@@ -43,8 +43,8 @@
     <!-- end loader -->
 @endsection
 
-<script src="/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/adm/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/adm/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 <script>
     //发送手机验证码
@@ -91,7 +91,7 @@
 
                 if(res.code==0){
                     alert('注册成功')
-                    location.href='/index/user/login'
+                    location.href='/login'
                 }else{
                     alert(res.msg);
                 }

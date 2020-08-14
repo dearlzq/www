@@ -10,9 +10,9 @@
     <link rel="stylesheet" type="text/css" href="/qtai/css/pages-cart.css" />
     <!-- 富文本编辑器 -->
 
-    <link rel="stylesheet" href="/admin/plugins/kindeditor/themes/default/default.css" />
-    <script charset="utf-8" src="/admin/plugins/kindeditor/kindeditor-min.js"></script>
-    <script charset="utf-8" src="/admin/plugins/kindeditor/lang/zh_CN.js"></script>
+    <link rel="stylesheet" href="/adm/plugins/kindeditor/themes/default/default.css" />
+    <script charset="utf-8" src="/adm/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/adm/plugins/kindeditor/lang/zh_CN.js"></script>
 
 
 </head>
