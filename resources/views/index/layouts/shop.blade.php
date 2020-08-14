@@ -24,6 +24,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 <!-- side nav right-->
 <div class="side-nav-panel-right">
     <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
@@ -40,6 +41,8 @@
 </div>
 <!-- end side nav right-->
 
+=======
+>>>>>>> 0eedbb6f6c97c41bf1b13ea39d7a75dc236340f1
 @yield('content')
 
 <!-- footer -->
@@ -62,14 +65,8 @@
     </div>
 </div>
 <!-- end footer -->
-
 <!-- scripts -->
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/materialize.min.js"></script>
-<script src="/static/js/owl.carousel.min.js"></script>
-<script src="/static/js/fakeLoader.min.js"></script>
-<script src="/static/js/animatedModal.min.js"></script>
-<script src="/static/js/main.js"></script>
-
+@include('index.layouts.footerjs')
 </body>
 </html>
+

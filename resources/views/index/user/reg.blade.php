@@ -22,7 +22,7 @@
                             <input type="password" placeholder="确认密码" class="validate" id="repwd"  name="" required>
                         </div>
                         <div class="input-field">
-                            <input type="password" placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
+                            <input type="text   " placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
                         </div>
                         <div class="input-field">
                             <input type="text" placeholder="短信验证码" class="validate" id="code" name="code" >  <a href="#" id="verify">获取短信验证码</a>
@@ -57,7 +57,12 @@
             dataType:'json',
             data:{'u_phone':u_phone},
             success:function(res){
-                alert(res.msg);
+                if(res.msg == '00000') {
+                    location.href = "/";
+                } else {
+                    alert(res.msg);
+                }
+
             }
 
         });
