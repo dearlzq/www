@@ -56,6 +56,9 @@
                     if(res.code=='00000'){
                         alert(res.msg);
                     }
+                    if(res.code=='00002'){
+                        alert(res.msg);
+                    }
                 },'json');
                 return;
             }

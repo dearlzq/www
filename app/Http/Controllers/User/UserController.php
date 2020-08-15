@@ -44,6 +44,8 @@ class UserController extends Controller
         $result = $this->send($name,$code);
         if($result['Message']=='OK'){
             return json_encode(['code'=>'00000','msg'=>'发送成功']);
+        }else{
+            return json_encode(['code'=>'000002','msg'=>'发送成功']);
         }
 
     }
