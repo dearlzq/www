@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shoucang;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Indexuser;
+use App\Model\UserModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -14,7 +15,7 @@ class SafeController extends Controller
     public function lists(Request $request){
         $data=$request->all();
         $u_id=request()->session()->get('u_id');
-        $res=Indexuser::where("u_id",$u_id)->first();
+        $res=UserModel::where("user_id",$u_id)->first();
         return view("index/shoucang/safe",compact("res"));
     }
     // 执行·
@@ -26,13 +27,13 @@ class SafeController extends Controller
 //        echo $u_pwd;
 //        dd($new_pwd);
 
-        $user = new Indexuser();
-        $isuser = $user::where('u_name',$u_name)->first();
+        $user = new UserModel();
+        $isuser = $user::where('user_name',$u_name)->first();
 //        dd($isuser);
         if(empty($isuser)){
             echo json_encode(['errno'=>00001,'msg'=>'此用户不存在']);
             die;
-        }else if(md5($u_pwd)!=$isuser->u_pwd){
+        }else if(md5($u_pwd)!=$isuser->password){
             echo json_encode(['errno'=>00001,'msg'=>'密码不正确']);
             die;
         }else{
@@ -40,7 +41,7 @@ class SafeController extends Controller
 //                'u_pwd'=>$new_pwd
 //            );
 //            $res = $user::where('u_name',$u_name)->update($arr);
-            $isuser->u_pwd=md5($new_pwd);
+            $isuser->password=md5($new_pwd);
 //            dd($res);
             if($isuser->save()){
                 Session::flush('u_phone');

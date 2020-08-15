@@ -30,8 +30,14 @@ Route::get('/goods/top/','Goods\RankController@index');//排行榜
 //购物车
 Route::get('/cart/add','Cart\CartController@add');//加入购物车
 Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
-Route::any('/collect','shoucang\ShouController@collect');//收藏
-
+Route::any('/collect','shoucang\ShouController@collect');//收藏\
+//订单
+Route::any('/order/index','Order\IndexController@index');
+//支付
+Route::get('/pay/checkout','Pay\IndexController@index');//支付
+Route::any('/pay/add','Pay\IndexController@add');//
+Route::any('/pay/alireturn','Pay\IndexController@alireturn');//
+Route::any('/pay/alinotify','Pay\IndexController@alinotify');//
 //评论留言
 Route::any('/fankui','liuyan\FanController@fankui');//展示
 Route::any('/fanAdd','liuyan\FanController@fanAdd');//执行
@@ -46,7 +52,7 @@ Route::any('/login','User\UserController@login'); //登录展示
 Route::any('/login_dos','User\UserController@login_do'); //执行登录
 //前台注册
 Route::any('/reg','User\UserController@reg');//注册
-Route::any('/go_reg','User\UserController@go_reg');//发送短信验证码
+Route::any('/reg/sendSMS','User\UserController@sendSMS');//发送短信验证码
 Route::any('/reg_do','User\UserController@reg_do');//执行注册
 Route::any('/tuichu','User\UserController@tuichu');//退出执行
 

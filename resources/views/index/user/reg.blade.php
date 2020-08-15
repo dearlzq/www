@@ -13,23 +13,22 @@
                     <form class="col s12" >
                         @csrf
                         <div class="input-field">
-                            <input type="text" class="validate" placeholder="用户名" id="u_name" name="u_name"  required>
+                            <input type="text" placeholder="手机号" class="validate" id="u_phone" name="tel" required>
                         </div>
                         <div class="input-field">
-                            <input type="password" placeholder="密码" class="validate" id="u_pwd" name="u_pwd" required>
+                            <input type="text" placeholder="短信验证码" class="validate" id="code" name="code" >
+                            <button type="button" class="btn btn-success">获取短信验证码</button>
                         </div>
                         <div class="input-field">
-                            <input type="password" placeholder="确认密码" class="validate" id="repwd"  name="" required>
+                            <input type="text" placeholder="用户名" class="validate" id="u_pwd" name="user_name" required>
                         </div>
                         <div class="input-field">
-                            <input type="text   " placeholder="手机号" class="validate" id="u_phone" name="u_phone" required>
+                            <input type="password" placeholder="密码" class="validate" id="u_pwd" name="password" required>
                         </div>
                         <div class="input-field">
-                            <input type="text" placeholder="短信验证码" class="validate" id="code" name="code" >  <a href="#" id="verify">获取短信验证码</a>
-
+                            <input type="password" placeholder="确认密码" class="validate" id="repwd"  name="repwd" required>
                         </div>
-
-                        <div><input type="submit" class="btn button-default" id="reg" value="REGISTER"></div>
+                        <div><input type="button" class="btn button-default" id="reg" value="REGISTER"></div>
                     </form>
                 </div>
             </div>
@@ -41,80 +40,61 @@
     <!-- loader -->
     <div id="fakeLoader"></div>
     <!-- end loader -->
+    <script src="/adm/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/adm/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        $('button').click(function () {
+            var name = $('input[name="tel"]').val();
+            var mobilereg = /^1[3|5|6|7|8|9]\d{9}$/;
+            if(mobilereg.test(name)){
+                //发送手机号验证码
+                $.get('/reg/sendSMS',{name:name},function (res) {
+                    if(res.code=='00001'){
+                        alert(res.msg);
+                    }
+                    if(res.code=='00000'){
+                        alert(res.msg);
+                    }
+                    if(res.code=='00002'){
+                        alert(res.msg);
+                    }
+                },'json');
+                return;
+            }
+                alert('请输入正确的手机号');
+                return;
+
+        });
+        $('#reg').click(function () {
+            var tel = $('input[name="tel"]').val();
+            var user_name = $('input[name="user_name"]').val();
+            var code = $('input[name="code"]').val();
+            var password = $('input[name="password"]').val();
+            var repwd = $('input[name="repwd"]').val();
+            $.post('/reg_do',{tel:tel,user_name:user_name,code:code,password:password,repwd:repwd},function (result) {
+                    if(result.code=='00001'){
+                        alert(result.msg);
+                    }
+                    if(result.code=='00002'){
+                        alert(result.msg);
+                    }
+                    if(result.code=='00003'){
+                        alert(result.msg);
+                    }
+                    if(result.code=='00004'){
+                        alert(result.msg);
+                    }
+                    if(result.code=='00005'){
+                        alert(result.msg);
+                    }
+                    if(result.code=='00000'){
+                        location.href = "/login"
+                    }else{
+                        alert(result.msg);
+                    }
+            },'json')
+        });
+    </script>
+
 @endsection
-
-<script src="/adm/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/adm/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-<script>
-    //发送手机验证码
-    $(document).on('click','#verify',function(){
-        var u_phone = $('#u_phone').val();
-        // alert(123);
-        $.ajax({
-            url:'/go_reg',
-            type:'post',
-            dataType:'json',
-            data:{'u_phone':u_phone},
-            success:function(res){
-                if(res.msg == '00000') {
-                    location.href = "/";
-                } else {
-                    alert(res.msg);
-                }
-
-            }
-
-        });
-    });
-
-
-    //注册
-    $(document).on('click','#reg',function(){
-        var u_name = $('#u_name').val();
-        var u_phone = $('#u_phone').val();
-        var code = $('#code').val();
-        var u_pwd = $('#u_pwd').val();
-        var repwd = $('#repwd').val();
-
-        if(repwd != u_pwd){
-            alert('两次密码不一致');
-            return false;
-        }
-        if(!validatorTel(u_phone)){
-            alert("手机号格式不正确哦");
-        }
-
-        //alert(123);
-        $.ajax({
-            url: '/reg_do',
-            type: 'post',
-            dataType: 'json',
-            data: {'u_name': u_name, 'u_phone': u_phone, 'code': code, 'u_pwd': u_pwd},
-            success: function (res) {
-                //console.log(res);
-
-                if(res.code==0){
-                    alert('注册成功')
-                    location.href='/login'
-                }else{
-                    alert(res.msg);
-                }
-
-//
-            }
-
-        });
-    });
-    /*
-     * 验证手机号码
-     */
-    function validatorTel(content){
-
-        // 正则验证格式
-        eval("var reg = /^1[34578]\\d{9}$/;");
-        return RegExp(reg).test(content);
-    }
-
-</script>
-
