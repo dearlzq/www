@@ -35,7 +35,6 @@
                         ${{$v->shop_price}} <span>${{$v->shop_price}}{{$v->shop_price}}</span>
                     </div>
                     <a href="{{url('/cart/cartlist/'.$v->goods_id)}}">
-                        <button class="btn button-default">ADD TO CART</button>
                     </a>
 
                 </div>

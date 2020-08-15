@@ -122,7 +122,7 @@
                             </div>
 
                             <a href="{{url('/cart/cartlist/'.$x->goods_id)}}">
-                                <button class="btn button-default">ADD TO CART</button>
+
                             </a>
                         </div>
                     </div>
@@ -166,7 +166,6 @@
                             </div>
 
                             <a href="{{url('/cart/cartlist/'.$m->goods_id)}}">
-                                <button class="btn button-default">ADD TO CART</button>
                             </a>
                         </div>
                     </div>
@@ -214,7 +213,6 @@
                         </div>
 
                         <a href="{{url('/cart/cartlist/'.$v->goods_id)}}">
-                            <button class="btn button-default">ADD TO CART</button>
                         </a>
                     </div>
                 </div>
@@ -228,10 +226,5 @@
     <!-- loader -->
     <div id="fakeLoader"></div>
     <!-- end loader -->
-
-
-
-
-
 
 @endsection
