@@ -71,7 +71,8 @@
                                 <div class="control-group">
                                     <label for="inputusername" class="control-label">用户名：</label>
                                     <div class="controls" id='u_name' u_name="{{$res['u_name']}}">
-                                    {{$res['u_name']}}
+{{--                                    {{$res['u_name']}}--}}
+                                        {{session('u_name')}}
                                     <!-- <input id="pwdid" type="text" name="u_name"/> -->
 
                                     </div>
@@ -79,7 +80,7 @@
                                 <div class="control-group">
                                     <label for="inputPassword" class="control-label">原密码：</label>
                                     <div class="controls">
-                                        <input class="fn-tinput" type="password" name="u_pwd" value="" placeholder="新密码" required id="password" data-rule-remote="php.php"  name="u_pwd" id="u_pwd">
+                                        <input class="fn-tinput" type="password" name="u_pwd" value="" placeholder="原密码" required id="password" data-rule-remote="php.php"  name="u_pwd" id="u_pwd">
                                     </div>
                                 </div>
                                 <div class="control-group">
