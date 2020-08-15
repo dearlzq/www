@@ -133,6 +133,7 @@ class UserController extends Controller
         $password = $request->post('password');
 
         $u = UserModel::where(['tel'=>$tel])->first();
+
         if(!$u){
             return json_encode(['code'=>'00002','msg'=>'账号错误']);
         }else{
@@ -140,6 +141,12 @@ class UserController extends Controller
             if(!$res){
                 return json_encode(['code'=>'00001','msg'=>'密码错误']);
             }else{
+
+                session(['u_phone' => $u['tel']]);
+                session(['u_id' => $u['user_id']]);
+                session(['u_name' => $u['user_name']]);
+                $request->session()->save();
+
                 return json_encode(['code'=>'00000','msg'=>'登录成功']);
             }
         }
