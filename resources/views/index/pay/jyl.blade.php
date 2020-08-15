@@ -29,8 +29,11 @@
 <div class="cart section" style="height:245px">
     <div class="container">
         <div class="pages-head">
-            <h3>{{$msg}}</h3>
-            
+            <h3><a href="/">回首页</a></h3>
+            <br>
+            <br>
+
+            <h2>{{$msg}}</h2>
         </div>
     </div>
 </div>
