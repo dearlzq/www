@@ -46,7 +46,7 @@ Route::any('/login','User\UserController@login'); //登录展示
 Route::any('/login_dos','User\UserController@login_do'); //执行登录
 //前台注册
 Route::any('/reg','User\UserController@reg');//注册
-Route::any('/go_reg','User\UserController@go_reg');//发送短信验证码
+Route::any('/reg/sendSMS','User\UserController@sendSMS');//发送短信验证码
 Route::any('/reg_do','User\UserController@reg_do');//执行注册
 Route::any('/tuichu','User\UserController@tuichu');//退出执行
 

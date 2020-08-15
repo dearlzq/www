@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 use App\Model\History;
 use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Cookie as cookies;
+use AlibabaCloud\Client\AlibabaCloud;
+use AlibabaCloud\Client\Exception\ClientException;
+use AlibabaCloud\Client\Exception\ServerException;
+use Illuminate\Support\Facades\Redis;
+use App\Model\UserModel;
 class UserController extends Controller
 {
     //注册展示页面
@@ -28,37 +33,55 @@ class UserController extends Controller
      * @return array
      *发送手机验证码
      */
-    public function go_reg(Request $request)
+    public function sendSMS()
     {
-        $phone = $request -> post('u_phone');
-        if(empty($phone)){
-            return [
-                'code' => 00001,
-                'msg' => '手机号不能为空',
-                'result' => ''
-            ];
+        $name = request()->name;
+        $reg = '/^1[3|5|6|7|8|9]\d{9}$/';
+        if(!preg_match($reg,$name)){
+            return json_encode(['code'=>'00001','msg'=>'请输入正确的手机号']);
         }
-        if(DB::table('shop_code')->where('u_phone', $phone)->count()>=1){
-            echo json_encode(['errno' => 00001, 'msg' => '该手机号已存在了!']);
-            exit;
+        $code = rand(10000,999999);
+        $result = $this->send($name,$code);
+        if($result['Message']=='OK'){
+            return json_encode(['code'=>'00000','msg'=>'发送成功']);
         }
-        $code_model = new Shop_code();
-        $phone_code_model = new PhoneCode();
-        #调用短信验证码发送接口
-        $re = $phone_code_model->code($phone);
-        if($re){
-            return [
-                'code' => 00000,
-                'msg' => '验证码发送成功',
-                'result' => ''
-            ];
-        }else{
-            return [
-                'code' => 00001,
-                'msg' => '验证码发送失败',
-                'result' => ''
-            ];
-        }
+
+    }
+
+    public function send($name,$code){
+
+
+    // Download：https://github.com/aliyun/openapi-sdk-php
+    // Usage：https://github.com/aliyun/openapi-sdk-php/blob/master/README.md
+
+            AlibabaCloud::accessKeyClient('LTAI4FxE8oZ8ZkDcFmYdaVCX', 'eOMo2F6fIxk3iqzXIfCVweSAJeaPOF')
+                ->regionId('cn-hangzhou')
+                ->asDefaultClient();
+
+            try {
+                $result = AlibabaCloud::rpc()
+                    ->product('Dysmsapi')
+                    // ->scheme('https') // https | http
+                    ->version('2017-05-25')
+                    ->action('SendSms')
+                    ->method('POST')
+                    ->host('dysmsapi.aliyuncs.com')
+                    ->options([
+                        'query' => [
+                            'RegionId' => "cn-hangzhou",
+                            'PhoneNumbers' => $name,
+                            'SignName' => "可乐加冰溜子",
+                            'TemplateCode' => "SMS_182680083",
+                            'TemplateParam' => "{code:$code}",
+                        ],
+                    ])
+                    ->request();
+                return $result->toArray();
+            } catch (ClientException $e) {
+                return $e->getErrorMessage() . PHP_EOL;
+            } catch (ServerException $e) {
+                return $e->getErrorMessage() . PHP_EOL;
+            }
 
     }
 
@@ -69,96 +92,57 @@ class UserController extends Controller
      */
     public function reg_do(Request $request)
     {
-        $phone = $request->post('u_phone');
-        if (empty($phone)) {
-            return ['code'=>'00007','msg'=>'手机号不能为空'];
+        $tel = $request->post('tel');
+        $user_name = $request->post('user_name');
+        $password = $request->post('password');
+        $repwd = $request->post('repwd');
+        $len = strlen($password);
+        $t = UserModel::where(['tel'=>$tel])->first();
+        $a = UserModel::where(['user_name'=>$user_name])->first();
+        if($t){
+            return json_encode(['code'=>'00001','msg'=>'手机号已存在']);
         }
-        $code = $request->post('code');
-        if (empty($code)) {
-            return ['code'=>'00001','msg'=>'验证码不能为空'];
-            die;
+        if($a){
+            return json_encode(['code'=>'00002','msg'=>'用户名已存在']);
         }
-
-        $codetrue = DB::table('shop_code')->where('u_phone', $phone)->first();
-        //dd($codetrue);
-        if ($code != $codetrue->code) {
-            echo json_encode(['errno' => 00001, 'msg' => '验证码错误!']);
-            exit;
+        if($len<6){
+            return json_encode(['code'=>'00003','msg'=>'密码长度不能小于六位']);
         }
-
-        $pwd = $request->post('u_pwd');
-        $arr='/^\w{6,16}$/';
-        if(empty($pwd)){
-            return ['code'=>'00001','msg'=>'密码不能为空'];
-            die;
-        }else if(!preg_match($arr,$pwd)){
-            return ['code'=>'00002','msg'=>'密码必须六位,以及六位以上'];
-            die;
+        if($repwd != $password){
+            return json_encode(['code'=>'00004','msg'=>'确认密码与密码不一致']);
         }
-        $u_name = $request -> post('u_name');
-
-
-        $user_model = new Indexuser();
-        var_dump($user_model);die;
-        $user_model->u_phone = $phone;
-        $user_model->u_pwd = md5($pwd);
-        $user_model->u_name = $u_name;
-        $user_model->u_time = time();
-        //echo 123;die;
-
-        if ($user_model->save()) {
-            return ['code'=>'00000','msg'=>'注册成功'];
+        $password = password_hash($password,PASSWORD_BCRYPT);
+        $data = [
+            'user_name' => $user_name,
+            'tel' => $tel,
+            'reg_time' => time(),
+            'password'=>$password
+        ];
+        $res = UserModel::insert($data);
+        if(!$res){
+            return json_encode(['code'=>'00005','msg'=>'注册失败']);
+        }else{
+            return json_encode(['code'=>'00000','msg'=>'注册成功']);
         }
     }
 
 // 登录执行
     public function login_do(Request $request)
     {
-        $data = $request->all();
+        $tel = $request->post('tel');
+        $password = $request->post('password');
 
-        $u_phone = $request->post('u_phone');
-        if (empty($u_phone)) {
-            return ['code'=>'00006','msg'=>'手机号不能为空'];
-
-        }
-
-        $u_pwd = $request->post('u_pwd');
-        //   //验证密码非空  必须是六位
-        $arr='/^\w{6,16}$/';
-        if(empty($u_pwd)){
-            return ['code'=>'00001','msg'=>'密码不能为空'];
-            die;
-        }else if(!preg_match($arr,$u_pwd)){
-            return ['code'=>'00002','msg'=>'密码必须六位,以及六位以上'];
-            die;
-        }
-        $where = [
-            'u_phone' => $u_phone,
-            'u_pwd' => $u_pwd
-        ];
-//        echo "123";die;
-
-        $user_model = Indexuser::where('u_phone', $data['u_phone'])->first()->toArray();
-//        dd($user_model);
-        if ($user_model) {
-            if ($user_model ['u_pwd'] == md5($data['u_pwd'])) {
-
-                $res=$this->user_history_insert($user_model['u_id']);
-//                dd($res);
-                session(['u_phone' => $user_model['u_phone']]);
-                session(['u_id' => $user_model['u_id']]);
-                session(['u_name' => $user_model['u_name']]);
-                $request->session()->save();
-
-                return ['code'=>'00000','msg'=>'登录成功'];
-
-            }else{
-                return ['code'=>'00003','msg'=>'密码错误'];
-            }
+        $u = UserModel::where(['tel'=>$tel])->first();
+        if(!$u){
+            return json_encode(['code'=>'00002','msg'=>'账号错误']);
         }else{
-            return ['code'=>'00004','msg'=>'没有此用户'];
+            $res = password_verify($password,$u->password);
+            if(!$res){
+                return json_encode(['code'=>'00001','msg'=>'密码错误']);
+            }else{
+                return json_encode(['code'=>'00000','msg'=>'登录成功']);
+            }
         }
-
     }
 
     //退出页面
