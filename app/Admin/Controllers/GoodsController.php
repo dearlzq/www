@@ -97,7 +97,6 @@ class GoodsController extends AdminController
         $form->text('keywords', __('Keywords'));
         $form->textarea('goods_desc', __('Goods desc'));
         $form->image('goods_img', __('Goods img'));
-        $form->number('add_time', __('Add time'));
         $form->switch('is_delete', __('Is delete'));
         $form->number('sale_num', __('Sale num'));
         $form->text('is_new', __('Is new'));
