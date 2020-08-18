@@ -51,12 +51,12 @@ class IndexController extends Controller
         $param1 = [
             'app_id'        => '2016101900723581',
             'method'        => 'alipay.trade.page.pay',
-            'return_url'    => 'http://1910.www.com/pay/alireturn',   //同步通知地址
+            'return_url'    => 'http://1910lxy.comcto.com/pay/alireturn',   //同步通知地址
             'charset'       => 'utf-8',
             'sign_type'     => 'RSA2',
             'timestamp'     => date('Y-m-d H:i:s'),
             'version'       => '1.0',
-            'notify_url'    => 'http://1910.www.com/pay/alinotify',   // 异步通知
+            'notify_url'    => 'http://1910lxy.comcto.com/pay/alinotify',   // 异步通知
             'biz_content'   => json_encode($param2),
         ];
 
