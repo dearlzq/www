@@ -24,9 +24,7 @@
                         <input type="button" class="btn btn-default" id="login" value="LOGIN">
                         <a href="/reg" class="btn btn-default">注册</a>
                         <div class="input-field">
-{{--                            <a href="/user/login/github"><img src="/static/img/github.jpg" alt=""></a>--}}
-{{--                            <a href="#"><img width="93" src="/img/wx.png" alt=""></a>--}}
-{{--                            <a href="#"><img width="93" src="/img/qq.png" alt=""></a>--}}
+                            <a href="/user/login/github"><img width="93" height="93" src="/static/img/github.jpg" alt=""></a>
                         </div>
                     </form>
                 </div>

@@ -132,7 +132,6 @@ class OrderController extends AdminController
     protected function form()
     {
         $form = new Form(new OrderModel());
-
         $form->text('order_sn', __('Order sn'));
         $form->number('user_id', __('User id'));
         $form->switch('order_status', __('Order status'));
