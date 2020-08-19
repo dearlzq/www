@@ -34,17 +34,21 @@ Route::get('/goods/top/','Goods\RankController@index');//排行榜
 //购物车
 Route::get('/cart/add','Cart\CartController@add');//加入购物车
 Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
-Route::any('/collect','shoucang\ShouController@collect');//收藏
 Route::get('/cart/talk','Cart\CartController@talk');//评论
 
 
+Route::get("/goods/fav","Goods\GoodsController@fav");//收藏
+
+Route::get("/shoucang","Shoucang\ShouController@wish_list");//收藏列表
+Route::get("/shoucang/add","Shoucang\ShouController@wish_add");//收藏列表
+Route::get("/shoucang/del","Shoucang\ShouController@wish_del");//取消收藏
 //订单
 Route::any('/order/index','Order\IndexController@index');
 //支付
 Route::get('/pay/checkout','Pay\IndexController@index');//支付
 Route::any('/pay/add','Pay\IndexController@add');//
-Route::any('/pay/alireturn','Pay\IndexController@alireturn');//
-Route::any('/pay/alinotify','Pay\IndexController@alinotify');//
+Route::any('/pay/alireturn','Pay\IndexController@alireturn');//支付同步
+Route::any('/pay/alinotify','Pay\IndexController@alinotify');//支付异步
 //评论留言
 Route::any('/fankui','liuyan\FanController@fankui');//展示
 Route::any('/fanAdd','liuyan\FanController@fanAdd');//执行

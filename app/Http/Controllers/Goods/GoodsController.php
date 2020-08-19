@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Goods;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use http\Env\Response;
 use App\Model\Goods;
 use Illuminate\Support\Facades\Redis;
 use App\Model\VideoModel;
@@ -116,5 +117,33 @@ class GoodsController extends Controller
     {
         $data = request()->input();
         dd($data);
+    }
+
+    public function fav(Request $request)
+    {
+        if(session('u_id') == null){
+            $response = ['error' => 000001, 'msg' => '未登录,请登录'];
+            return $response;
+        }
+        $uid = session('u_id');
+        $goods_id = $request->get('id',0);
+        $g = Goods::find($goods_id);
+        if(empty($goods_id) || empty($g)){
+            $response = ['error'=>300001 , 'msg' => '收藏失败检查商品是否存在'];
+            return $response;
+        }
+        $redis_fav_key = 'ss:fav_goods:' . $uid;
+        //判断是否已收藏
+        if(Redis::zScore($redis_fav_key,$goods_id))
+        {
+            $response = ['error' => 300002 , 'msg' => '已收藏'];
+        }else{
+            Redis::zAdd($redis_fav_key,time(),$goods_id);
+            $response = ['error' => 0 , 'msg' => '收藏成功'];
+            //加入收藏排行榜
+            $redis_goods_fav_list_key = 'ss:fav_goods_rank';
+            Redis::zIncrBy($redis_goods_fav_list_key,1,$goods_id);
+        }
+        return $response;
     }
 }

@@ -3,7 +3,6 @@
 @section('title', '商品详情')
 @section('content')
 
-
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')
@@ -22,11 +21,11 @@
             <p>{{$goods['goods_desc']}}</p>
 
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
-                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车展示</a>
-            @if($goods['fav']==0)
-                <button type="button" data-gid="{{$goods['goods_id']}}" class="btn button-default" id="fav">收藏</button>
+                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车页面</a>
+            @if($goods['fav'] == 0)
+            <button type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</button>
             @else
-                <button type="button" class="btn" id="fav">已收藏</button>
+            <button type="button" id="fav" class="btn">已收藏</button>
             @endif
         </div>
 
@@ -57,15 +56,6 @@
             </div>
             <div class="row">
                 <form class="col s12 form-details">
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" required class="validate" placeholder="{{$goods['goods_name']}}">--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="email" class="validate" placeholder="EMAIL" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" class="validate" placeholder="SUBJECT" required>--}}
-{{--                    </div>--}}
                     <h5>{{$goods['goods_name']}}</h5>
                     <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
                     <p>{{$goods['goods_desc']}}</p>
@@ -112,7 +102,6 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 <!-- scripts -->
-<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
 {{--//富文本--}}
 <link rel="stylesheet" href="/adm/plugins/kindeditor/themes/default/default.css" />
 <script charset="utf-8" src="/adm/plugins/kindeditor/kindeditor-min.js"></script>
@@ -124,7 +113,6 @@
 
 
 
-<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
 <div class="prism-player" id="player-con"></div>
 <script>
     var player = new Aliplayer({
@@ -166,6 +154,8 @@
         });
     });
 
+
+<script>
     $(function(){
 
         //购物车
@@ -179,7 +169,7 @@
                     console.log(d);
                     if(d.errno==0)
                     {
-                        alert("已成功加入购物车");
+                        $.MessageBox("加入购物车成功");
                     }
                 }
             });
@@ -221,5 +211,25 @@
             }
         })
     })
+    });
+
+    $("#fav").on('click',function(){
+        var goods_id = $(this).attr("goods_id");
+        $.ajax({
+            url: "/goods/fav?id=" + goods_id,
+            type: "get",
+            dataType: 'json',
+            success: function(d){
+                if(d.error==0)
+                {
+                    $.MessageBox("收藏成功");
+                    $("#fav").text("已收藏")
+                }else{
+                    $.MessageBox(d.msg);
+                }
+            }
+        });
+    });
 </script>
+
 @endsection

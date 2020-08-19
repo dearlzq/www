@@ -25,11 +25,12 @@ class CategoryController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new CategoryModel());
+        $grid->model()->orderBy('cat_id','desc');
         $grid->column('cat_id', __('分类ID'));
         $grid->column('cat_name', __('分类名'));
         //$grid->column('keywords', __('Keywords'));
         //$grid->column('cat_desc', __('Cat desc'));
-        $grid->column('parent_id', __('Parent id'));
+        $grid->column('parent_id', __('父级ID'));
         //$grid->column('sort_order', __('Sort order'));
         //$grid->column('template_file', __('Template file'));
         //$grid->column('measure_unit', __('Measure unit'));
@@ -88,7 +89,7 @@ class CategoryController extends AdminController
         $form->switch('sort_order', __('排序'))->default(50);
         //$form->text('template_file', __('Template file'));
         //$form->text('measure_unit', __('Measure unit'));
-        $form->switch('show_in_nav', __('Show in nav'));
+        $form->switch('show_in_nav', __('是否展示'));
         //$form->text('style', __('Style'));
         //$form->switch('is_show', __('Is show'))->default(1);
         //$form->switch('grade', __('Grade'));

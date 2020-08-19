@@ -13,7 +13,7 @@
                                 <img src="/static/img/cart-menu1.png" alt="">
                             </div>
                             <div class="col s7">
-                                <h5><a href="">Fashion Men's</a></h5>
+                                <h5><a href="/goods/product-list">购物车列表</a></h5>
                             </div>
                         </div>
                         <div class="row quantity">
