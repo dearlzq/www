@@ -27,19 +27,16 @@ class GoodsController extends AdminController
     {
         $grid = new Grid(new GoodsModel());
         $grid->model()->orderBy('goods_id','desc');
-        $grid->column('goods_id', __('Goods id'));
-        $grid->column('cat_id', __('Cat id'));
-        $grid->column('goods_sn', __('Goods sn'));
-        $grid->column('goods_name', __('Goods name'));
-        $grid->column('click_count', __('Click count'));
-        $grid->column('goods_number', __('Goods number'));
-        $grid->column('shop_price', __('Shop price'));
-        $grid->column('keywords', __('Keywords'));
+        $grid->column('goods_id', __('商品ID'));
+        $grid->column('cat_id', __('分类ID'));
+        $grid->column('goods_sn', __('商品货号'));
+        $grid->column('goods_name', __('商品名称'));
+        $grid->column('goods_number', __('商品数量'));
+        $grid->column('shop_price', __('商品价格'));
+        $grid->column('keywords', __('商品关键字'));
 //        $grid->column('goods_desc', __('Goods desc'));
-        $grid->column('goods_img', __('Goods img'))->image();
-        $grid->column('add_time', __('Add time'));
-        $grid->column('is_delete', __('Is delete'));
-        $grid->column('sale_num', __('Sale num'));
+        $grid->column('goods_img', __('商品图片'))->image();
+        $grid->column('add_time', __('添加时间'));
         $grid->column('is_new', '是否新品')->display(function ($released) {
             return $released ? '是' : '否';
         });
@@ -88,20 +85,17 @@ class GoodsController extends AdminController
     {
         $form = new Form(new GoodsModel());
 
-        $form->select('cat_id',__('cart id'))->options(CategoryModel::selectOptions());
-        $form->text('goods_sn', __('Goods sn'));
-        $form->text('goods_name', __('Goods name'));
-        $form->number('click_count', __('Click count'));
-        $form->number('goods_number', __('Goods number'));
-        $form->decimal('shop_price', __('Shop price'))->default(0.00);
-        $form->text('keywords', __('Keywords'));
-        $form->textarea('goods_desc', __('Goods desc'));
-        $form->image('goods_img', __('Goods img'));
-        $form->switch('is_delete', __('Is delete'));
-        $form->number('sale_num', __('Sale num'));
-        $form->text('is_new', __('Is new'));
-        $form->text('is_img', __('Is img'));
-        $form->text('is_show', __('Is show'));
+        $form->select('cat_id',__('分类ID'))->options(CategoryModel::selectOptions());
+        $form->text('goods_sn', __('商品货号'));
+        $form->text('goods_name', __('商品名称'));
+        $form->number('goods_number', __('商品数量'));
+        $form->decimal('shop_price', __('商品价格'))->default(0.00);
+        $form->text('keywords', __('商品关键字'));
+        $form->textarea('goods_desc', __('商品介绍'));
+        $form->image('goods_img', __('商品图片'));
+        $form->text('is_new', __('是否新品'));
+        $form->text('is_img', __('是否轮播图'));
+        $form->text('is_show', __('是否推荐'));
         return $form;
     }
 }

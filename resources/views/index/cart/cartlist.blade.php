@@ -66,7 +66,7 @@
                         <h6>总价</h6>
                     </div>
                     <div class="col s5">
-                        <h6>$1000.00</h6>
+                        <h6>${{$v['shop_price']}}</h6>
                     </div>
                 </div>
             </div>
