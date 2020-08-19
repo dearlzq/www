@@ -13,7 +13,7 @@ class FanController extends Controller
             $p_id=shop_fan::where("p_id",$v['f_id'])->get();
             $v['aa']=$p_id;
         }
-        return view('index.liuyan.liuyan',compact('shop_fan'));
+        return view('index.goods.shop-single',compact('shop_fan'));
     }
     //反馈的执行方法
     public function fanAdd(Request $request){

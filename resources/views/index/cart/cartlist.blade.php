@@ -72,7 +72,7 @@
             </div>
         @endforeach
         {{--<button class="btn button-default">结账</button>--}}
-        <a href="/order/index" class="btn button-default">订单</a>
+        <a href="/order/index" class="btn button-default">生成订单</a>
     </div>
 </div>
 <!-- end cart -->

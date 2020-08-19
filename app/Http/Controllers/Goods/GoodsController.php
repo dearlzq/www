@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Model\Goods;
 use Illuminate\Support\Facades\Redis;
 use App\Model\VideoModel;
+use App\Model\shop_fan;
+use App\Model\Indexuser;
+
 
 class GoodsController extends Controller
 {
@@ -58,11 +61,44 @@ class GoodsController extends Controller
         ];
 
 //        echo '<pre>';dd($data);echo '</pre>';
-        return view('index.goods.shop-single',$data);
 
-//        $goods = Goods::find($id);
-//        return view('index.goods.shop-single',compact('goods'));
+        $shop_fan=shop_fan::where(['f_del'=>1,'p_id'=>0])->get();
+        foreach($shop_fan as $k=>$v){
+            $p_id=shop_fan::where("p_id",$v['f_id'])->get();
+            $v['aa']=$p_id;
+        }
+        return view('index.goods.shop-single',compact('shop_fan'),$data);
+
     }
+
+
+
+    //反馈的执行方法
+    public function fanAdd(Request $request){
+        echo '1';
+        die;
+        $u_id=request()->session()->get('u_id');
+        if(empty($u_id)){
+            return redirect('/login');
+        }
+        $shop_fan=new shop_fan;
+        $data=$request->all();
+        if(empty($data['content'])){
+            return redirect('/index.goods.shop-single');
+            exit;
+        }
+        // print_r($data);exit;
+        $shop_fan->f_time=time();
+        $shop_fan->f_text=$data['content'];
+        $u_name=Indexuser::where('u_id',$u_id)->value('u_name');
+        // print_r($u_name);
+        $shop_fan->f_name=$u_name;
+        $res=$shop_fan->save($data);
+        if($res){
+            return redirect('/index.goods.shop-single');
+        };
+    }
+
 
 
 

@@ -26,11 +26,18 @@ Route::get('/goods/shop-single/{id}','Goods\GoodsController@ShopSingle');//商�
 Route::get('/goods/product-list','Goods\GoodsController@ProductList');//商品列表
 Route::get('/goods/talklist/','Goods\GoodsController@talklist');//商品评论
 Route::get('/goods/top/','Goods\RankController@index');//排行榜
+//Route::any('/fanAdd','Goods\GoodsController@fanAdd');//执行
+//Route::any('/fankui','Goods\GoodsController@fankui');//展示
+
+
 
 //购物车
 Route::get('/cart/add','Cart\CartController@add');//加入购物车
 Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
-Route::any('/collect','shoucang\ShouController@collect');//收藏\
+Route::any('/collect','shoucang\ShouController@collect');//收藏
+Route::get('/cart/talk','Cart\CartController@talk');//评论
+
+
 //订单
 Route::any('/order/index','Order\IndexController@index');
 //支付
