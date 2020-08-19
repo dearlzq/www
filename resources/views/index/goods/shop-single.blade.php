@@ -22,8 +22,11 @@
 
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
                 <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车列表</a>
-            <a type="button" class="btn button-default" id="gowish"  goods_id="{{$goods['goods_id']}}" href="javascript:;">收藏</a>
-
+            @if($goods['fav'] == 0)
+            <butto type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</butto><a
+            @else
+            <button type="button" id="fav" class="btn">已收藏</button>
+            @endif
         </div>
 
         <div class="review">
@@ -113,15 +116,22 @@
         });
     });
 
-    $("#gowish").click(function(){
-        var goods_id=$(this).attr("goods_id")
-        $.get(
-            "/shoucang/add",
-            {goods_id:goods_id},
-            function(res){
-                alert(res.msg)
+    $("#fav").on('click',function(){
+        var goods_id = $(this).attr("goods_id");
+        $.ajax({
+            url: "/goods/fav?id=" + goods_id,
+            type: "get",
+            dataType: 'json',
+            success: function(d){
+                if(d.error==0)
+                {
+                    $.MessageBox("收藏成功");
+                    $("#fav").text("已收藏")
+                }else{
+                    $.MessageBox(d.msg);
+                }
             }
-        )
+        });
     });
 </script>
 
