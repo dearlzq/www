@@ -104,10 +104,6 @@ class GoodsController extends Controller
         }else{
             Redis::zAdd($redis_fav_key,time(),$goods_id);
             $response = ['error' => 0 , 'msg' => '收藏成功'];
-//            $data = [
-//                'fav'=>1
-//            ];
-//            $res = Goods::where(['goods_id'=>$goods_id])->update($data);
             //加入收藏排行榜
             $redis_goods_fav_list_key = 'ss:fav_goods_rank';
             Redis::zIncrBy($redis_goods_fav_list_key,1,$goods_id);
