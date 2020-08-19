@@ -48,15 +48,6 @@
             </div>
             <div class="row">
                 <form class="col s12 form-details">
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" required class="validate" placeholder="{{$goods['goods_name']}}">--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="email" class="validate" placeholder="EMAIL" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" class="validate" placeholder="SUBJECT" required>--}}
-{{--                    </div>--}}
                     <h5>{{$goods['goods_name']}}</h5>
                     <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
                     <p>{{$goods['goods_desc']}}</p>
@@ -81,8 +72,7 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 <!-- scripts -->
-<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
-<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+
 <div class="prism-player" id="player-con"></div>
 <script>
     var player = new Aliplayer({
@@ -102,6 +92,7 @@
         }
     );
 </script>
+
 <script>
     $(function(){
         $("#cart_add").click(function(e){
@@ -114,11 +105,12 @@
                     console.log(d);
                     if(d.errno==0)
                     {
-                        alert("已成功加入购物车");
+                        $.MessageBox("加入购物车成功");
                     }
                 }
             });
         });
-    })
+        $()
+    });
 </script>
 @endsection

@@ -21,6 +21,8 @@
 
     <link rel="shortcut icon" href="/static/img/favicon.png">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.2.2/dist/messagebox.min.css">
+    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
 </head>
 <body>
 
