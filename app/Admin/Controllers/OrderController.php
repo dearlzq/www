@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+//use App\Model\OrderGoodsModel;
 
 class OrderController extends AdminController
 {
@@ -25,7 +26,6 @@ class OrderController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new OrderModel());
-
         $grid->model()->orderBy('order_id','desc');
         $grid->column('order_id', __('订单iD'));
         $grid->column('order_sn', __('订单号'));
@@ -50,7 +50,6 @@ class OrderController extends AdminController
                     return '<span style="color: red">未支付</span>';
             }
         });
-
         return $grid;
     }
 
@@ -189,7 +188,6 @@ class OrderController extends AdminController
         $form->number('parent_id', __('Parent id'));
         $form->decimal('discount', __('Discount'))->default(0.00);
         $form->switch('order_type', __('Order type'))->default(1);
-
 
         return $form;
     }

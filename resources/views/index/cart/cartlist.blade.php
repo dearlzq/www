@@ -47,7 +47,7 @@
                             <h5>Price</h5>
                         </div>
                         <div class="col s7">
-                            <h5>{{$v['shop_price']}}</h5>
+                            <h5>￥{{$v['shop_price']}}</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -66,7 +66,7 @@
                         <h6>总价</h6>
                     </div>
                     <div class="col s5">
-                        <h6>${{$v['shop_price']}}</h6>
+                        <h6>￥{{$v['shop_price']}}</h6>
                     </div>
                 </div>
             </div>

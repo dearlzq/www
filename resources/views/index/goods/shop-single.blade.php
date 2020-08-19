@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="shop-single">
-            <img src="/storage/{{$goods['goods_img']}}" alt="">
+            <img src="/storage/{{$goods['goods_img']}}" width="100" height="100" alt="">
             <h5>{{$goods['goods_name']}}</h5>
             <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
             <p>{{$goods['goods_desc']}}</p>
@@ -23,11 +23,15 @@
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
                 <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车页面</a>
             @if($goods['fav'] == 0)
-            <butto type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</butto><a
+            <button type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</butto><a
             @else
             <button type="button" id="fav" class="btn">已收藏</button>
             @endif
         </div>
+
+        <!-- 视频展示 开始 -->
+        <div class="prism-player" id="player-con"></div>
+        <!-- 视频展示 结束 -->
 
         <div class="review">
             <h5>1 reviews</h5>

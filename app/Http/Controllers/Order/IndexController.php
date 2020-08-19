@@ -13,8 +13,13 @@ class IndexController extends Controller
 {
     public function index()
     {
-
-        $uid = 6666;
+//        if($uid = session('u_id') == null)
+//        {
+//            header('Refresh:2;url=/login');
+//            echo '请先登录正在跳转';
+//            die;
+//        }
+        $uid = 1;
         //获取购物车商品
         $cart_goods = Cart::goods();
         if(empty($cart_goods))
