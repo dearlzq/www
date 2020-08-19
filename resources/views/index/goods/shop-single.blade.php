@@ -3,7 +3,6 @@
 @section('title', '商品详情')
 @section('content')
 
-
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')
@@ -114,7 +113,7 @@
                     console.log(d);
                     if(d.errno==0)
                     {
-                        alert("已成功加入购物车");
+                        $.MessageBox("已成功加入购物车");
                     }
                 }
             });

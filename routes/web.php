@@ -36,8 +36,8 @@ Route::any('/order/index','Order\IndexController@index');
 //支付
 Route::get('/pay/checkout','Pay\IndexController@index');//支付
 Route::any('/pay/add','Pay\IndexController@add');//
-Route::any('/pay/alireturn','Pay\IndexController@alireturn');//
-Route::any('/pay/alinotify','Pay\IndexController@alinotify');//
+Route::any('/pay/alireturn','Pay\IndexController@alireturn');//支付同步
+Route::any('/pay/alinotify','Pay\IndexController@alinotify');//支付异步
 //评论留言
 Route::any('/fankui','liuyan\FanController@fankui');//展示
 Route::any('/fanAdd','liuyan\FanController@fanAdd');//执行
