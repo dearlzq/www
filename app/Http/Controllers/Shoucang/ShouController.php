@@ -4,87 +4,116 @@
 namespace App\Http\Controllers\Shoucang;
 
 use App\Http\Controllers\Controller;
-use App\Model\Collert;
 use Illuminate\Http\Request;
-use App\Model\Goods;
-use App\Model\History;
-use App\Model\Indexuser;
-use App\Model\shop_uneed;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-
+use App\Model\Wish;
 class ShouController extends Controller
 {
-
-    //个人信息
-    public function add(Request $request)
+    /*
+     * 收藏页面
+     */
+    public function wish_list()
     {
-        $uid = Session::get('u_id');
-        $date = DB::table('date')->get();
-        return view('/index/user/home', ['date' => $date]);
+        //获取用户id
+        $userinfo = session("u_id");
+        if (!$userinfo) { //判断是否登陆
+            echo("<script>alert('请您先登录！');location='/login'</script>");
+            die;
+        }
+        $user_id = $userinfo['user_id'];
+        //获取用户收藏
+        $wish = Wish::select("admin_wish.*", "p_goods.goods_id", "p_goods.goods_name", "p_goods.goods_img", "p_goods.shop_price")->
+        leftjoin("p_goods", "p_goods.goods_id", "=", "admin_wish.goods_id")->
+        where(['user_id' => $user_id])->
+        orderBy("add_time", "desc")->
+        get()->
+        toArray();
+        //判断用户有无商品
+        if (empty($wish)) {
+            echo("<script>alert('您还没有收藏过商品呢！再转转吧!');location='/'</script>");
+        }
+        return view("shoucang/shoucang", ['wish' => $wish]);
     }
 
-
-    /**
-     * @param Request $request
-     * @return array
-     * 执行添加
+    /*
+     *加入收藏
      */
-    public function add_do(Request $request)
+    public function wish_add()
     {
-        $_token = $request->all();
-        $a1 = empty($_token['y_img']);
-        $a2 = empty($_token['y_name']);
-        if ($a1 == true || $a2 == true) {
-            echo '参数缺失';
-            exit;
+        $goods_id = request()->goods_id;//接收参数
+        $userinfo = session("u_id");
+        // 判断用户是否登陆
+        if (!$userinfo) {
+            $reposn = [
+                'code' => 100008,
+                'msg' => '请您先登录',
+            ];
+            return $reposn;
         }
-        $uid = request()->session()->get('u_id');
-        $_token['u_id'] = $uid;
-        //添加图片 单文件上传
-        $res = shop_uneed::insert($_token);
+        $user_id = session("u_id");;
+        //判断该用户是否添加过该商品
+        $dataNum = Wish::where(['goods_id' => $goods_id, "user_id" => $user_id])->count();
+        if ($dataNum) {
+            $reposn = [
+                'code' => 100009,
+                'msg' => "您已经添加过该商品，请勿重复操作!"
+            ];
+            return $reposn;
+        }
+        $data = [
+            "user_id" => $user_id,
+            "goods_id" => $goods_id,
+            "add_time" => time()
+        ];
+        $res = Wish::insert($data);
         if ($res) {
-            echo '添加成功s';
-//            return redirect("admin/login/login");
-        }
-    }
-
-//单文件上传
-    public function uplode($y_img)
-    {
-        $file = $y_img;
-        if ($file->isValid()) {
-            $store = $file->store('uploads');
-            return $store;
-        }
-        exit('图片上传失败');
-    }
-
-
-    /**
-     * 收藏
-     */
-    public function collect()
-    {
-        $collert = new Collert();
-        $u_id = request()->session()->get('u_id');
-        $goods_id = $collert::where(['u_id' => $u_id, 'is_del' => 1])->get('goods_id')->toArray();
-//        dd($goods_id);
-        $goods = new Goods();
-        $goods_info = $goods::where(['is_delete' => 1])->whereIn('goods_id', $goods_id)->get()->toArray();
-//        dd($goods_info);
-
-//猜你喜欢
-        $history = History::where("u_id", $u_id)->limit(1)->get('goods_id')->toArray();
-        if ($history) {
-            $cate_id = Goods::where(["goods_id" => $history[0]['goods_id']])->first('cate_id')->toArray();
-            $history_goods = Goods::where(["cate_id" => $cate_id])->orderby("desc")->limit(4)->get()->toArray();
+            $reposn = [
+                'code' => 000000,
+                'msg' => "加入收藏成功!"
+            ];
         } else {
-            $history_goods = [];
+            $reposn = [
+                'code' => 000000,
+                'msg' => "加入收藏失败!"
+            ];
         }
-
-        return view('/index/shoucang/shoucang', ['goods_info' => $goods_info, 'history_goods' => $history_goods]);
+        return $reposn;
     }
 
+    /*
+     * 取消收藏
+     */
+    public function wish_del()
+    {
+        $goods_id = request()->goods_id;//接收参数
+        $userinfo = session("userinfo");
+        $user_id = $userinfo['user_id'];
+        if (!$goods_id) {
+            $reposn = [
+                "code" => 100011,
+                "msg" => "非法操作"
+            ];
+            return $reposn;
+        }
+        if (!$userinfo) {
+            $reposn = [
+                "code" => 100011,
+                "msg" => "非法操作"
+            ];
+            return $reposn;
+        }
+        $res = Wish::where(['goods_id' => $goods_id, "user_id" => $user_id])->delete();
+        if ($res) {
+            $reposn = [
+                "code" => 000000,
+                "msg" => "取消收藏成功"
+            ];
+        } else {
+            $reposn = [
+                "code" => 100012,
+                "msg" => "取消收藏失败"
+            ];
+        }
+        return $reposn;
+    }
 }
 ?>

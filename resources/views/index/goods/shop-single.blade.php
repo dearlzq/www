@@ -3,7 +3,6 @@
 @section('title', '商品详情')
 @section('content')
 
-
 @include('index.layouts.navbar')
 @include('index.layouts.cartmenu')
 @include('index.layouts.navright')
@@ -23,6 +22,8 @@
 
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
                 <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车列表</a>
+            <a type="button" class="btn button-default" id="gowish"  goods_id="{{$goods['goods_id']}}" href="javascript:;">收藏</a>
+
         </div>
 
         <div class="review">
@@ -110,7 +111,18 @@
                 }
             });
         });
-        $()
+    });
+
+    $("#gowish").click(function(){
+        var goods_id=$(this).attr("goods_id")
+        $.get(
+            "/shoucang/add",
+            {goods_id:goods_id},
+            function(res){
+                alert(res.msg)
+            }
+        )
     });
 </script>
+
 @endsection

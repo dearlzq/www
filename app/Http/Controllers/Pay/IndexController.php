@@ -45,28 +45,26 @@ class IndexController extends Controller
         }
 
         $param2 = [
-            'out_trade_no'      => $o->order_sn,     //商户订单号
+            'out_trade_no'      => $o->order_sn,
             'product_code'      => 'FAST_INSTANT_TRADE_PAY',
-            'total_amount'      => $o->order_amount,    //订单总金额
-            'subject'           => '测试支付'.Str::random(16),
+            'total_amount'      => $o->order_amount,
+            'subject'           => '支付'.Str::random(16),
         ];
 
         $param1 = [
             'app_id'        => '2016101900723581',
             'method'        => 'alipay.trade.page.pay',
-            'return_url'    => 'http://1910.www.com/pay/alireturn',   //同步通知地址
+            'return_url'    => 'http://1910.www.com/pay/alireturn',
             'charset'       => 'utf-8',
             'sign_type'     => 'RSA2',
             'timestamp'     => date('Y-m-d H:i:s'),
             'version'       => '1.0',
-            'notify_url'    => 'http://1910.www.com/pay/alinotify',   // 异步通知
+            'notify_url'    => 'http://1910.www.com/pay/alinotify',
             'biz_content'   => json_encode($param2),
         ];
 
-
         // 计算签名
         ksort($param1);
-
         $str = "";
         foreach($param1 as $k=>$v)
         {

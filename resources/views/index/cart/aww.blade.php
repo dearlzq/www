@@ -7,5 +7,5 @@
     @include('index.layouts.navbar')
     @include('index.layouts.navright')
     @include('index.layouts.cartmenu')
-<h1>没有商品，空购物车</h1>
+        <h1>没有商品，空购物车</h1>
 @endsection
