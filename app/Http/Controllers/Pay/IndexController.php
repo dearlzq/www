@@ -29,6 +29,9 @@ class IndexController extends Controller
 //        dd($pay_type);die;
         return redirect($return_url);
     }
+    /*
+     * 支付宝支付
+     */
     protected function aliPay($order_id)
     {
 
@@ -101,6 +104,7 @@ class IndexController extends Controller
     public function alinotify(){
         //记录日志
         $data = json_encode($_POST);
+        dd($data);
         Log::channel('alipay')->info($data);
     }
     /*

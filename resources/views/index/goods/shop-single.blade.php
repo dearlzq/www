@@ -21,9 +21,12 @@
             <p>{{$goods['goods_desc']}}</p>
 
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
-                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车列表</a>
-            <a type="button" class="btn button-default" id="gowish"  goods_id="{{$goods['goods_id']}}" href="javascript:;">收藏</a>
-
+                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车页面</a>
+            @if($goods['fav'] == 0)
+            <button type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</button><a
+            @else
+            <button type="button" id="fav" class="btn">已收藏</button>
+            @endif
         </div>
 
         <div class="review">
@@ -49,15 +52,6 @@
             </div>
             <div class="row">
                 <form class="col s12 form-details">
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" required class="validate" placeholder="{{$goods['goods_name']}}">--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="email" class="validate" placeholder="EMAIL" required>--}}
-{{--                    </div>--}}
-{{--                    <div class="input-field">--}}
-{{--                        <input type="text" class="validate" placeholder="SUBJECT" required>--}}
-{{--                    </div>--}}
                     <h5>{{$goods['goods_name']}}</h5>
                     <div class="price">${{$goods['shop_price']}} <span>${{$goods['shop_price']}}{{$goods['shop_price']}}</span></div>
                     <p>{{$goods['goods_desc']}}</p>
@@ -82,8 +76,7 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 <!-- scripts -->
-<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
-<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+
 <div class="prism-player" id="player-con"></div>
 <script>
     var player = new Aliplayer({
@@ -116,23 +109,30 @@
                     console.log(d);
                     if(d.errno==0)
                     {
-                        $.MessageBox("已成功加入购物车");
+                        $.MessageBox("加入购物车成功");
                     }
                 }
             });
         });
-    })
+    });
 
-    $("#gowish").click(function(){
-        var goods_id=$(this).attr("goods_id")
-        $.get(
-            "/shoucang/add",
-            {goods_id:goods_id},
-            function(res){
-                alert(res.msg)
+    $("#fav").on('click',function(){
+        var goods_id = $(this).attr("goods_id");
+        $.ajax({
+            url: "/goods/fav?id=" + goods_id,
+            type: "get",
+            dataType: 'json',
+            success: function(d){
+                if(d.error==0)
+                {
+                    $.MessageBox("收藏成功");
+                    $("#fav").text("已收藏")
+                }else{
+                    $.MessageBox(d.msg);
+                }
             }
-        )
-    })
+        });
+    });
 </script>
 
 @endsection

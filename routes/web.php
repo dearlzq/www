@@ -30,6 +30,8 @@ Route::get('/goods/top/','Goods\RankController@index');//排行榜
 //购物车
 Route::get('/cart/add','Cart\CartController@add');//加入购物车
 Route::get('/cart/cartlist','Cart\CartController@cartList');//购物车列表
+Route::get("/goods/fav","Goods\GoodsController@fav");//收藏列表
+
 Route::get("/shoucang","Shoucang\ShouController@wish_list");//收藏列表
 Route::get("/shoucang/add","Shoucang\ShouController@wish_add");//收藏列表
 Route::get("/shoucang/del","Shoucang\ShouController@wish_del");//取消收藏
