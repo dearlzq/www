@@ -44,6 +44,8 @@ class UserController extends Controller
         $result = $this->send($name,$code);
         if($result['Message']=='OK'){
             return json_encode(['code'=>'00000','msg'=>'发送成功']);
+        }else{
+            return json_encode(['code'=>'000002','msg'=>'发送成功']);
         }
 
     }
@@ -163,6 +165,13 @@ class UserController extends Controller
         }
     }
 
+    public function githubLogin()
+    {
+        $url = 'https://github.com/login/oauth/authorize?client_id='.env('OAUTH_GITHUB_ID').'&redirect_uri='.env('APP_URL').'/oauth/github';
+        return redirect($url);
+    }
+
+
     public function user_history_insert($u_id){
         if(!empty($u_id)){
             $sf=Cookie::get('user_history');
@@ -198,3 +207,8 @@ class UserController extends Controller
     }
 
 }
+
+
+
+
+
