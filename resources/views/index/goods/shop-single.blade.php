@@ -21,7 +21,7 @@
             <p>{{$goods['goods_desc']}}</p>
 
                 <button class="btn button-default" data-gid="{{$goods['goods_id']}}" id="cart_add">加入购物车</button>
-                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车列表</a>
+                <a class="btn button-default" href="{{url('/cart/cartlist')}}">购物车页面</a>
             @if($goods['fav'] == 0)
             <butto type="button" class="btn button-default" id="fav" goods_id="{{$goods['goods_id']}}">收藏</butto><a
             @else
