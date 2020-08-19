@@ -64,10 +64,6 @@ class GoodsController extends Controller
 //        return view('index.goods.shop-single',compact('goods'));
     }
 
-
-
-
-
     //商品列表
     public function ProductList()
     {
