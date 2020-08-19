@@ -66,13 +66,13 @@
                         <h6>总价</h6>
                     </div>
                     <div class="col s5">
-                        <h6>$1000.00</h6>
+                        <h6>${{$v['shop_price']}}</h6>
                     </div>
                 </div>
             </div>
         @endforeach
         {{--<button class="btn button-default">结账</button>--}}
-        <a href="/order/index" class="btn button-default">订单</a>
+        <a href="/order/index" class="btn button-default">提交订单</a>
     </div>
 </div>
 <!-- end cart -->
